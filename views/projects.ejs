@@ -1,7 +1,11 @@
 <%- include('partials/header') %>
 
 <div class="container">
-    <div class="row" id="yourp">Your Projects</div>
+  <div class="row">
+    <h1 id="yourp">Your Projects
+  <button type="button" id="addbutton" href="add-project" class="btn btn-primary btn-lg">+ Add Project</button>
+    </h1>
+      </div>
   <div class="row row-cols-1 row-cols-md-3 g-4">
   
    <%   for(var i=0; i < projects.length ;i++) {%>
@@ -9,8 +13,8 @@
   <div class="col">
     <div class="card" style="width: 18rem;">
       <div class="card-body">
-        <h5 class="card-title"><%-   projects[i].pname%> </h5>
-          <p class="card-text"><%-   projects[i].desc%></p>
+        <h5 class="card-title"><%-   projects[i].project_name%> </h5>
+          <p class="card-text"><%-   projects[i].project_description%></p>
           <p1 class="time"><%-  projects[i].time%> <p1 class="Status">Status: <%- projects[i].status %> </p>
         <a href="/projects/<%- projects[i].id %> " class="card-link">Open Project</a>
         <a href="#" class="card-link">Delete Project</a>

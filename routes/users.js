@@ -5,7 +5,16 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
-router.get('/:id', function(req, res, next) {
-  res.send("User "+ req.params.id);
+router.get('/signup',function(req,res,next){
+  res.render('signup',{
+    title:'Sign Up',
+    currentPage:'signup',
+  });
+});
+router.get('/login',function(req,res,next){
+  res.render('login',{
+    title:'Log in',
+    currentPage: 'login',
+  });
 });
 module.exports = router;

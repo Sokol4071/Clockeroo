@@ -8,21 +8,22 @@
   </head>
   <body>
 
-  <div class="container">
+  
     <nav style="background-color: #800ace;">
-    
+    <div class="container">
     <ul class="nav justify-content-end navbar bt-light xl" >
         <li class="nav-item1" >
             <a class="navbar-brand <%- currentPage == 'index' ? 'active' : ''%>"   href="/">
             <img src="/images/103180.png" alt="" width="30" height="24" class="d-inline-block align-text-top"/>Home</a>
           </li>
         <li class="nav-item" >
-          <a class="nav-link <%- currentPage == 'signup' ? 'active' : ''%>" aria-current="page" href="/signup">Sign up</a>
+          <a class="nav-link <%- currentPage == 'signup' ? 'active' : ''%>" aria-current="page" href="/users/signup">Sign up</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link <%- currentPage == 'login' ? 'active' : ''%>"" href="/login">Log in</a>
+          <a class="nav-link <%- currentPage == 'login' ? 'active' : ''%>"" href="/users/login">Log in</a>
         </li>
        </ul>
+      </div>
 
     </nav>
-   <div
+ <div
