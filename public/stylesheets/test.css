@@ -11227,4 +11227,83 @@ textarea.form-control-lg {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     
 }
+#addprojectcardlook
+{   
+    background-color: #f5f5f5;
+    width: 55rem;
+    height: 20rem;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    justify-content: center;
+  
+}
+#add-project-button
+{
+    background-color: #6610f2;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    width: 10rem;
+    height: 3rem;
+    align-items: right;
+    justify-content: end;
+    transform: translateX(+400%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    
+}
+#add-project-button:hover 
+{  
+    background-color: #6610f2;
+    color: greenyellow;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+}
+#signupform
+{
+    background-color: #f5f5f5;
+    width: 55rem;
+    height: 28rem;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    justify-content: center;
+    
+  
+}
+#signup-button
+{
+        background-color: #6610f2;
+        border-radius: 5px;
+        border: none;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 10rem;
+        height: 3rem;
+        align-items: right;
+        justify-content: end;
+        transform: translateX(+400%);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        
+}
+#signup-button:hover 
+{  
+    background-color: #6610f2;
+    color: orangered;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+}
 /*# sourceMappingURL=test.css.map */

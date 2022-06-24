@@ -1,20 +1,13 @@
 var express = require('express');
+const { time } = require('console');
 var router = express.Router();
+var userscontroller = require('../controler/users-controler');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-router.get('/signup',function(req,res,next){
-  res.render('signup',{
-    title:'Sign Up',
-    currentPage:'signup',
-  });
-});
-router.get('/login',function(req,res,next){
-  res.render('login',{
-    title:'Log in',
-    currentPage: 'login',
-  });
-});
+
+router.post('/signup',userscontroller.createuser);
+router.get('/signup',userscontroller.signup);
+router.post('/login',userscontroller.login);
+//router.show('/logout',userscontroller.logout); 
+
+
 module.exports = router;

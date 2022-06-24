@@ -1,35 +1,12 @@
 const { time } = require('console');
 var express = require('express');
 var router = express.Router();
-var operations = require('../operations/projects');
+var projectcontroller = require('../controler/project-controler');
 
-
-router.get('/',async function(req,res,next){
-    try {
-      let projects = await operations.getAllProjects();
+router.get('/',projectcontroller.index);
+router.get('/:id',projectcontroller.show);
+router.get('/add/project',projectcontroller.add);
+router.post('/create',projectcontroller.create);
+router.post('/:id/delete',projectcontroller.delete);
   
-      console.log(projects);
-      
-      res.render('projects',{
-      title:'Projects',
-      currentPage: 'projects',
-      projects: projects
-    });
-    } catch (error) {
-      console.log(error);
-      
-    }
-    
-  });
-  router.get('/:id',async function(req,res,next){
-    let id = req.params.id;
-    let project = await operations.getProjectbyId(req.params.id);
-    res.render('project',{
-      title:'Projectspec',
-      currentPage: 'project',
-      id: id,
-      project: project
-    });
-  });
-  
-  module.exports = router;
+module.exports = router;

@@ -1,13 +1,24 @@
 <%- include('partials/header') %>
 
 <div class="container">
+  <form action="/projects" method="post">
     <div class="card" id="addprojectcardlook" >
-        
-
-        
-        </div>
+      <div class="mb-3">
+        <label for="Project title" class="form-label">Project Title</label>
+        <input type="name" name="project-title" class="form-control" id="project-name-input" placeholder="example.'My First Project'">
       </div>
-</div>
+      <div class="mb-3">
+        <label for="project-description" class="form-label">Project Description</label>
+        <textarea class="form-control" name="project-description" id="project-description-text" rows="3" placeholder="example.'Project is freelance time-tracking app done using NodeJS and Express'"></textarea>
+      </div>
+      <div class="text-right">
+      <button type="submit" class="btn btn-primary" id="add-project-button">Create Project</button>
+
+      </div>
+    </div>
+  </form>
+ </div>
+
 
 
 <%- include('partials/footer') %>
