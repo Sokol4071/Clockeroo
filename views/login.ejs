@@ -1,7 +1,33 @@
 <%- include('partials/header') %>
 
 <div class="container">
-  About
+  <form action="/users/login" method="post">
+    <div class="card" id="loginform" >
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="name" name="username" class="form-control" id="username-input"  <% if(formData.username && formData.username.value) { %>
+          value="<%- formData.username.value%>" <% } %> placeholder="example.'Darko G'"> 
+          <% if(formData.username && !formData.username.valid) { %>
+            <div class="text-danger mt-1 ms-2">
+                <small><%- formData.username.errorMsg%></small>
+            </div>
+        <% } %>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" id="password-input" <% if(formData.password && formData.password.value) { %>
+          value="<%- formData.password.value%>" <% } %> placeholder="example.XXXXXX">
+        <% if(formData.password && !formData.password.valid) { %>
+          <div class="text-danger mt-1 ms-2">
+              <small><%- formData.password.errorMsg%></small>
+          </div>
+      <% } %>
+      </div>
+       <div class="text-right">
+       <button type="submit" class="btn btn-primary" id="login-button">Log in</button>
+          </div>
+        </div>
+      </form>
 </div>
 
 

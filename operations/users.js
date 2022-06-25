@@ -39,7 +39,7 @@ getAllUsers = () => {
 }
 getUserbyUsername = (username) => {
     return new Promise((resolve, reject) => {
-            connection.query('SELECT * FROM user WHERE username = ?', [username], (err, rows) => { 
+            connection.query('SELECT * FROM user WHERE name = ?', [username], (err, rows) => { 
             if (err) {
                 reject(err);
                 console.log(err);
@@ -52,7 +52,7 @@ getUserbyUsername = (username) => {
 }
 login = (username, password) => {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM user WHERE username = ? AND password = ?', [username, password], (err, rows) => {  
+        connection.query('SELECT * FROM user WHERE name = ? AND password = ?', [username, password], (err, rows) => {  
             if (err) {
                 reject(err);
                 console.log(err);
