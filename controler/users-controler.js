@@ -1,4 +1,5 @@
 const { error } = require('console');
+const { getAllProjects } = require('../operations/projects');
 const projects = require('../operations/projects');
 const userops = require('../operations/users');
 
@@ -19,19 +20,19 @@ exports.createuser = async (req, res, next) => {
         let formData = validateAndCreateUserFormData(req.body);
         if (formData.valid) {
             let input = {
-                username: formData.username.value,
+                name: formData.username.value,
                 email: formData.email.value,
                 password: formData.password.value
             };
             let user = await userops.CreateUser(input);
             console.log(user);
             console.log(input);
-            res.render('/projects', {
-                title: 'projects',
-                currentPage: 'projects',
-                formData: formData,
-                projects: projects.getAllProjects(user.user_id)
-            });
+            
+            res.render('login', {
+            title: 'login',
+            currentPage: 'login',
+            formData: formData
+        });  
         } else {
             console.log(formData);
             res.render('signup', {
@@ -72,7 +73,7 @@ exports.createuser = async (req, res, next) => {
             formData.valid = false;
             formData.username.errorMsg = 'Username must be at least 3 characters long';
         }
-        if(username == getAllUsers().username){
+        if(username == getAllUsers().name){
             formData.username.valid = false;
             formData.valid = false;
             formData.username.errorMsg = 'Username already exists';
@@ -117,20 +118,16 @@ exports.logger= async(req,res,next) => {
 exports.login = async (req, res, next) => {
     let users= await userops.getAllUsers();
     let formData = validateloginData(req.body);
+    
     if (formData.valid) {
         let input = {
-            username: formData.username.value,
+            name: formData.username.value,
             password: formData.password.value
         };
-        let user = await userops.login(input);
-        console.log(user);
-        console.log(input);
-        res.render('/projects', {
-            title: 'projects',
-            currentPage: 'projects',
-            formData: formData,
-            projects: projects.getAllProjects(user.user_id)
-        });
+        let user = await userops.loginUser(input);
+        let projects = getAllProjects(user.user_id);
+        
+        res.redirect('../projects');
                       
     } else {
         res.render('login', {
@@ -144,35 +141,17 @@ function validateloginData(body) {
     let username = body.username;
     let password = body.password;
     let formData = {
-        valid: false,
+        valid: true,
         username: {
             value: username,
-            valid: false
+            valid: true
         },
         password: {
             value: password,
-            valid: false
+            valid: true
         }
-    };
-    if (username == getAllUsers().username){
-        formData.username.valid = true;
-        formData.valid = true;}
-        else{
-            formData.username.valid = false;
-            formData.valid = false;
-            formData.username.errorMsg = 'Username does not exist';
-
-        }
-    if (password == getUserbyUsername(username).password){
-        formData.password.valid = true;
-        formData.valid = true;}
-        else{
-            formData.password.valid = false;
-            formData.valid = false;
-            formData.password.errorMsg = 'Password does not match';
-
     }
-   
+    
     return formData;
 }
 

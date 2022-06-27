@@ -1,13 +1,16 @@
 const { error } = require('console');
 const projectops = require('../operations/projects');
+const userops = require('../operations/users')
 
 exports.index = async (req, res, next) => {
     try {
-        let projects = await projectops.getAllProjects(user_id);
+        let formData=[];
+        let projects = await projectops.getAllProjects();
             res.render('projects', {
             title: 'Projects',
             currentPage: 'projects', 
-            projects: projects
+            projects: projects,
+            formData:formData
         }); 
     } catch (error) {
         console.log(error);
@@ -25,7 +28,7 @@ exports.show = async (req, res, next) => {
             Error('Invalid id');
         }
         
-        let project = await projectops.getProjectbyId(req.params.id);
+        let project = await projectops.getProjectbyId(id);
 
         if(!project){
             Error(404, 'Project not found');
@@ -42,33 +45,52 @@ exports.show = async (req, res, next) => {
     }
 }
 exports.add = async function (req, res, next) { 
-    let formData = {}
-
+    let formData = {};
+    let user = {};
     res.render('add-project', {
         title: 'Add Project',
         currentPage: 'projects',
-        formData: formData
+        formData: formData,
+        user: user
     });
 }
 exports.create = async function(req, res, next) {
-   
+       try{
+        let user = {};
+        let projects= await projectops.getAllProjects(user.user_id)
         let formData = validateAndCreateMovieFormData(req.body);
+        console.log(user);
+       }
+       catch{
+        console.log(error);
+       }
         if(formData.valid){
 
             let input = {
+            
                 name: formData.title.value,
                 description: formData.description.value
             };
-    
-        let project = await projectops.CreateProject(input);
-        console.log(movie);
+        
+        let project = await projectops.CreateProject(user.user_id,input.name,input.description);
+        console.log(project);
         console.log(input);
-        res.redirect('/projects');
+        res.render('projects', {
+            title: 'projects',
+            currentPage: 'projects',
+            formData: formData,
+            projects: projects,
+            user: user
+           
+        });
         }
         else{
+
             res.render('add-project', {
                 title: 'Add Project',
                 currentPage: 'projects',
+                formData: formData,
+                user: user
             });
        
     }  

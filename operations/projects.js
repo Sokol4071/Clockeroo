@@ -1,9 +1,9 @@
 var mysqlConfig = require('../connection/mysql');
 var connection = mysqlConfig.connection;
 
-getAllProjects = (user_id) => {
+getAllProjects = () => {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM projects WHERE user_id=?' ,[user_id],(err, rows) => {
+        connection.query('SELECT * FROM projects' ,(err, rows) => {
             if (err) {
                 reject(err);
                 console.log(err);
@@ -61,9 +61,9 @@ DeleteProject = (id) => {
         });
     });
 }
-CreateProject = (name, description) => {
+CreateProject = (user_id,name, description) => {
     return new Promise((resolve, reject) => {
-        connection.query('INSERT INTO projects (project_name, project_description,status,time,start_date,end_date) VALUES (?, ?,Ongoing,0,1,NULL)', [name, description], (err, rows) => {
+        connection.query('INSERT INTO projects (user_id,project_name, project_description,status,time,start_date,end_date) VALUES (?,?, ?,Ongoing,0,1,NULL)', [user_id,name, description], (err, rows) => {
             if (err) {
                 reject(err);
                 console.log(err);

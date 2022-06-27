@@ -50,13 +50,14 @@ getUserbyUsername = (username) => {
         });
     });
 }
-login = (username, password) => {
+loginUser = (name, password) => {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM user WHERE name = ? AND password = ?', [username, password], (err, rows) => {  
+        connection.query('SELECT * FROM user WHERE name = ? AND password = ?', [{name},{password}], (err, rows) => {  
             if (err) {
                 reject(err);
                 console.log(err);
             } else {
+                console.log(rows);
                 resolve(rows);  
             }
         });
@@ -74,6 +75,6 @@ module.exports = {
     CreateUser,
     getAllUsers,
     getUserbyUsername,
-    login
+    loginUser
 
 }
