@@ -1,16 +1,18 @@
 <%- include('partials/header') %>
 
 <div class="container">
-    <div class="card" id="projectcardlook" >
-        <h5 class="card-header"><%- project.project_name %> </h5>
+     <div class="card" id="projectcardlook" >
+         <h1 class="card-header"><%=project.project_name %> </h1> 
         <div class="card-body" >
-          <h5 class="card-title"><%- project.project_description %></h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary ">Start Time</a>
-          <a href="#" class="btn btn-primary ">Finish Project</a>
+          <h3 class="timeelapsed">Time spent on project: <%- project.time%> </h3>
+          <h5 class="card-title"><%- project.project_description%></h5>
+          <p class="card-text">Current Status: <%- project.status %> </p>
+          <button id="startTimer" class="btn btn-primary ">Start Time</button>
+          <a id="pauseTimer" class="btn btn-primary ">Pause Time</a>
+          <a id="EndTimer" class="btn btn-primary ">End Time</a>
+          <a href="#" onclick="<%-    %> " class="btn btn-primary ">Finish Project</a>
           <a href="#" class="btn btn-primary">Postpone Project</a>
           
-        </div>
       </div>
 </div>
 

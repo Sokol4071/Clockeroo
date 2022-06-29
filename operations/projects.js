@@ -9,18 +9,20 @@ getAllProjects = () => {
                 console.log(err);
             } else {
                 resolve(rows);
+                
             }
         });
     });
 }
-getProjectbyId = (id) => {
+getProjectbyId = (pid) => {
     return new Promise((resolve, reject) => {
-            connection.query('SELECT * FROM projects WHERE project_id = ?', [id], (err, rows) => {
+            connection.query('SELECT * FROM projects WHERE project_id = ?', [pid], (err, rows) => {
             if (err) {
                 reject(err);
                 console.log(err);
             } else {
-                resolve(rows);
+                resolve(rows[0]);
+                console.log(rows[0]);
             }
         });
     });
@@ -37,33 +39,47 @@ UpdateTime = (id, time) => {
         });
     });
 }
-UpdateStatus = (id, status) => {
+UpdateStatusToFinished = (id) => {
     return new Promise((resolve, reject) => {
-        connection.query('UPDATE projects SET status = ? WHERE project_id = ?', [status, id], (err, rows) => {
+        connection.query('UPDATE projects SET status = ? WHERE project_id = ?', ['Finished', id], (err, rows) => {
+            if (err) {
+                reject(err);
+                console.log(err);
+            } else {
+                resolve(rows[0]);
+            }
+        });
+    });
+}
+UpdateStatusToPostponed = (id) => {
+    return new Promise((resolve, reject) => {
+        connection.query('UPDATE projects SET status = ? WHERE project_id = ?', ['Postponed', id], (err, rows) => {
+            if (err) {
+                reject(err);
+                console.log(err);
+            } else {
+                resolve(rows[0]);
+            }
+        });
+    });
+}
+DeleteProject = (pid) => {
+    return new Promise((resolve, reject) => {
+        let sql = "DELETE FROM projects WHERE project_id = " + pid;
+        connection.query(sql, (err, rows) => {
             if (err) {
                 reject(err);
                 console.log(err);
             } else {
                 resolve(rows);
+                console.log(rows);
             }
         });
     });
 }
-DeleteProject = (id) => {
+CreateProject = (name, description) => {
     return new Promise((resolve, reject) => {
-        connection.query('DELETE FROM projects WHERE project_id = ?', [id], (err, rows) => {
-            if (err) {
-                reject(err);
-                console.log(err);
-            } else {
-                resolve(rows);
-            }
-        });
-    });
-}
-CreateProject = (user_id,name, description) => {
-    return new Promise((resolve, reject) => {
-        connection.query('INSERT INTO projects (user_id,project_name, project_description,status,time,start_date,end_date) VALUES (?,?, ?,Ongoing,0,1,NULL)', [user_id,name, description], (err, rows) => {
+        connection.query('INSERT INTO projects (user_id,project_name, project_description,status) VALUES (?,?,?,?)', ['1',name, description,'Ongoing'], (err, rows) => {
             if (err) {
                 reject(err);
                 console.log(err);
@@ -79,7 +95,8 @@ module.exports = {
     getProjectbyId: getProjectbyId,
     getAllProjects: getAllProjects,
     UpdateTime: UpdateTime,
-    UpdateStatus: UpdateStatus,
+    UpdateStatusToFinished: UpdateStatusToFinished,
+    UpdateStatusToPostponed: UpdateStatusToPostponed,
     DeleteProject: DeleteProject,
     CreateProject: CreateProject,
     

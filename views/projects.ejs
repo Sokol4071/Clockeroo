@@ -16,8 +16,12 @@
         <h5 class="card-title"><%-   projects[i].project_name%> </h5>
           <p class="card-text"><%-   projects[i].project_description%></p>
           <p1 class="time"><%-  projects[i].time%> <p1 class="Status">Status: <%- projects[i].status %> </p>
-        <a href="/projects/<%- projects[i].project_id %> " class="card-link">Open Project</a>
-        <a href="#" class="card-link">Delete Project</a>
+        <button href="/projects/<%- projects[i].project_id %> " class="btn btn-primary">Open Project</button>
+        <div class="p-1 text-end">
+        <form method="post" action="./projects/delete/<%- projects[i].project_id %>">
+        <button class="btn btn-danger">Delete Project</button>
+      </form>
+        </div>
       </div>
     </div>
   </div>

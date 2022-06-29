@@ -11130,7 +11130,7 @@ textarea.form-control-lg {
 }
 
 #footer {
-  position: bottom;
+  position: absolute;
   bottom: 0;
   width: 100%;
   height: 69px;

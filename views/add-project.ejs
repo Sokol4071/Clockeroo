@@ -5,11 +5,23 @@
     <div class="card" id="addprojectcardlook" >
       <div class="mb-3">
         <label for="Project title" class="form-label">Project Title</label>
-        <input type="name" name="project-title" class="form-control" id="project-name-input" placeholder="example.'My First Project'">
+        <input type="name" name="title" class="form-control" id="project-name-input" <% if(formData.title && formData.title.value) { %>
+          value="<%- formData.title.value%>" <% } %> placeholder="example.'My First Project'">
+          <% if(formData.title && !formData.title.valid) { %>
+            <div class="text-danger mt-1 ms-2">
+                <small><%- formData.title.errorMsg%></small>
+            </div>
+        <% } %>
       </div>
       <div class="mb-3">
         <label for="project-description" class="form-label">Project Description</label>
-        <textarea class="form-control" name="project-description" id="project-description-text" rows="3" placeholder="example.'Project is freelance time-tracking app done using NodeJS and Express'"></textarea>
+        <input type="name" name="description" id="project-description-text" <% if(formData.description && formData.description.value) { %>
+          value="<%- formData.description.value%>" <% } %> placeholder="example.'Project is freelance time-tracking app done using NodeJS and Express'">
+             <% if(formData.description && !formData.description.valid) { %>
+          <div class="text-danger mt-1 ms-2">
+              <small><%- formData.description.errorMsg%></small>
+          </div>
+      <% } %>
       </div>
       <div class="text-right">
       <button type="submit" class="btn btn-primary" id="add-project-button">Create Project</button>

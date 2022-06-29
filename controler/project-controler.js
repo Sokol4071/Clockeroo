@@ -16,86 +16,79 @@ exports.index = async (req, res, next) => {
         console.log(error);
     }
 }
-exports.show = async (req, res, next) => {
-    try {
+exports.show = async function (req, res, next){
+   
         let id = req.params.id;
 
         id = id.replace( /[^\d].*/, '' );
 
         id = Number(id);
+        
 
         if(typeof id != 'number'){
             Error('Invalid id');
         }
-        
+   
+       
         let project = await projectops.getProjectbyId(id);
-
-        if(!project){
-            Error(404, 'Project not found');
-                         
-                }
-            res.render('project', {
-            title: 'Projectspec',
-            currentPage: 'project',
-            id: req.params.id,
-            project: project    
-        });
-    } catch (error) {
-        console.log(error);
-    }
+        console.log(project)
+                res.render('project', {
+                    title: 'Projectspec',
+                    currentPage: 'project',
+                    project
+                   
+                });
+               
+      
+    
 }
 exports.add = async function (req, res, next) { 
     let formData = {};
-    let user = {};
-    res.render('add-project', {
+        res.render('add-project', {
         title: 'Add Project',
         currentPage: 'projects',
         formData: formData,
-        user: user
+        
     });
 }
 exports.create = async function(req, res, next) {
-       try{
-        let user = {};
-        let projects= await projectops.getAllProjects(user.user_id)
-        let formData = validateAndCreateMovieFormData(req.body);
-        console.log(user);
-       }
-       catch{
-        console.log(error);
-       }
+      
+        
+        let formData = validateAndCreateProjectFormData(req.body);
+        
+      
         if(formData.valid){
 
             let input = {
             
-                name: formData.title.value,
+                title: formData.title.value,
                 description: formData.description.value
             };
-        
-        let project = await projectops.CreateProject(user.user_id,input.name,input.description);
+        let projects= await projectops.getAllProjects();
+        let project = await projectops.CreateProject(input.title,input.description);
         console.log(project);
         console.log(input);
         res.render('projects', {
             title: 'projects',
             currentPage: 'projects',
             formData: formData,
-            projects: projects,
-            user: user
-           
+            projects: projects
+                       
         });
-        }
+     }
+       
         else{
 
             res.render('add-project', {
                 title: 'Add Project',
                 currentPage: 'projects',
-                formData: formData,
-                user: user
+                formData: formData
+                
             });
        
     }  
 }
-    function validateAndCreateMovieFormData(body){
+    function validateAndCreateProjectFormData(body){
 
         let title = body.title;
         let description = body.description;
@@ -104,31 +97,35 @@ exports.create = async function(req, res, next) {
         let formData = {
             valid: true,
             title: {
-                value: title, 
+                value: title,
+                
             },
             description: {
-                value: description
+                value: description,
+                
             }
         };
     
-        if(!title || title.length < 5){
+        if(title.length < 5){
             formData.title = {
                 value: title,
                 valid: false,
-                errorMsg: 'Enter a valid title'
+               
             }
-    
+
+            formData.title.errorMsg='Enter a valid title';
             formData.valid = false;
         }
     
-        if(!description || description.length < 10){
+        if(description.length < 10){
             formData.description = {
                 value: description,
                 valid: false,
-                errorMsg: 'Enter valid description'
+               
             }
-    
+            formData.description.errorMsg='Enter valid description';
             formData.valid = false;
+            
         }
     
         
@@ -136,24 +133,13 @@ exports.create = async function(req, res, next) {
         return formData;
     }
  
-exports.delete = async (req, res, next) => {
-    try {
+exports.delete = async function(req, res, next) {
+    
         let id = req.params.id;
-        id = id.replace( /[^\d].*/, '' );
-        id = Number(id); 
-        if(typeof id != 'number'){
-            Error('Invalid id');
-        }
-        let project = await projectops.DeleteProject(id);
-
-        if(!project){
-            Error(404, 'Project not found');
-        }
-
+       
+        projectops.DeleteProject(id);
         res.redirect('/projects');
-    } catch (error) {
-        console.log(error);
-    }
+  
 }
 
 
